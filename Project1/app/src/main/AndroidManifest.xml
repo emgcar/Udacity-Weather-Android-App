@@ -37,6 +37,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.udacity.caraher.emma.project1.MainActivity"/>
         </activity>
+
+        <provider
+            android:authorities="com.udacity.caraher.emma.project1.app"
+            android:name=".data.WeatherProvider"
+            />
     </application>
 
 </manifest>

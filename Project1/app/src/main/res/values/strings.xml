@@ -12,6 +12,7 @@
     <string name="pref_unit_key">units</string>
     <string name="action_map">Map Location</string>
     <string name="action_share">Share</string>
+    <string name="appid_key">c73d88b36a5f4230405e8a150afcaf66</string>
 
     <string name="pref_unit_celsius">Celsius</string>
     <string name="pref_unit_fahrenheit">Fahrenheit</string>
