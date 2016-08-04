@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/tools">
     <string name="app_name">Project1</string>
     <string name="action_settings">Settings</string>
     <string name="action_refresh" translatable="false">Refresh</string>
@@ -17,6 +17,9 @@
     <string name="pref_unit_celsius">Celsius</string>
     <string name="pref_unit_fahrenheit">Fahrenheit</string>
 
+    <string name="format_wind_kmh"> km/H</string>
+    <string name="format_wind_mph"> mph</string>
+
     <string-array name="pref_temp_units">
         <item>Celsius</item>
         <item>Fahrenheit</item>
@@ -26,5 +29,19 @@
         <item>Celsius</item>
         <item>Fahrenheit</item>
     </string-array>
+
+    <!-- Date label when displaying today's weather forecast [CHAR LIMIT=20] -->
+    <string name="today">Today</string>
+
+    <!-- Date label when displaying tomorrow's weather forecast [CHAR LIMIT=20] -->
+    <string name="tomorrow">Tomorrow</string>
+
+    <!-- Date format for displaying day of week and date (i.e. Mon Jun 1) [CHAR LIMIT=20] -->
+    <string name="format_full_friendly_date"><xliff:g id="day">%1$s</xliff:g>, <xliff:g id="date">%2$s</xliff:g></string>
+
+    <string name="format_temperature" ><xliff:g id="temp">%1.0f</xliff:g>\u00B0</string>
+    <string name="format_humidity" >HUMIDITY: <xliff:g id="humidity">%1.0f</xliff:g>\uFF05</string>
+    <string name="format_pressure" >PRESSURE: <xliff:g id="pressure">%1.0f</xliff:g> bar</string>
+    <string name="format_wind" >WIND: <xliff:g id="wind">%s</xliff:g></string>
 
 </resources>

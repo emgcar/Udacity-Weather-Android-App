@@ -1,10 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item_forecast"
     android:layout_height="wrap_content"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    android:gravity="center_vertical"
-    android:id="@+id/list_item_forecast_textView">
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:background="@drawable/touch_selector"
+    android:gravity="center_vertical">
 
-</TextView>
+    <FrameLayout
+        android:layout_width="60dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/list_item_icon"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:gravity="center" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/desc_list"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:layout_weight="7">
+        <TextView
+            android:id="@+id/list_item_date_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:fontFamily="sans-serif-condensed" />
+        <TextView
+            android:id="@+id/list_item_forecast_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:fontFamily="sans-serif-condensed" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/temperature_list"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:layout_weight="5"
+        android:gravity="center" >
+        <TextView
+            android:id="@+id/list_item_high_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:fontFamily="sans-serif-condensed" />
+        <TextView
+            android:id="@+id/list_item_low_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:fontFamily="sans-serif-condensed" />
+    </LinearLayout>
+</LinearLayout>
