@@ -1,13 +1,14 @@
 package com.udacity.caraher.emma.project1;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.udacity.caraher.emma.project1.sync.SunshineSyncAdapter;
 
 public class MainActivity extends AppCompatActivity implements ForecastFragment.Callback  {
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements ForecastFragment.
         ForecastFragment forecastFragment =  ((ForecastFragment)getSupportFragmentManager()
             .findFragmentById(R.id.fragment_forecast));
         forecastFragment.setIsTablet(mTwoPane);
+
+        SunshineSyncAdapter.initializeSyncAdapter(this);
     }
 
     @Override
@@ -62,28 +65,9 @@ public class MainActivity extends AppCompatActivity implements ForecastFragment.
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingsIntent);
             return true;
-        } else if (id == R.id.action_map) {
-            openLocationInMap();
-            return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void openLocationInMap() {
-        String locationPref = Utility.getPreferredLocation(this);
-
-        Uri geoLocation = Uri.parse("geo:0,0?").buildUpon()
-                .appendQueryParameter("q", locationPref)
-                .build();
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(geoLocation);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        } else {
-            Log.e("Opening Map Call", "Couldn't call " + locationPref + ", no receiving apps installed!");
-        }
     }
 
     @Override
