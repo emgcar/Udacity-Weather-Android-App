@@ -26,4 +26,11 @@
         android:summaryOn="@string/pref_enable_notifications_true"
         android:defaultValue="@string/pref_enable_notifications_default" />
 
+    <ListPreference
+        android:defaultValue="https://raw.githubusercontent.com/udacity/Sunshine-Version-2/sunshine_master/app/src/main/res/drawable-xxhdpi/art_%s.png"
+        android:entries="@array/pref_icon_options"
+        android:entryValues="@array/pref_icon_values"
+        android:key="@string/pref_art_pack_key"
+        android:title="@string/pref_art_pack_label" />
+
 </PreferenceScreen>

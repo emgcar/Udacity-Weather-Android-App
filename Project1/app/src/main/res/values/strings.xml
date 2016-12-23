@@ -47,6 +47,19 @@
         <item>Fahrenheit</item>
     </string-array>
 
+    <string name="pref_art_pack_label">Icon Pack</string>
+    <string name="pref_art_pack_key" translatable="false">art_pack</string>
+
+    <string-array name="pref_icon_options">
+        <item>Sunshine</item>
+        <item>Cute Dogs</item>
+    </string-array>
+
+    <string-array name="pref_icon_values">
+        <item>https://raw.githubusercontent.com/udacity/Sunshine-Version-2/sunshine_master/app/src/main/res/drawable-xxhdpi/art_%s.png</item>
+        <item>https://raw.githubusercontent.com/udacity/Sunshine-Version-2/sunshine_master/app/src/main/res/drawable-mdpi/art_%s.png</item>
+    </string-array>
+
     <!-- Date label when displaying today's weather forecast [CHAR LIMIT=20] -->
     <string name="today">Today</string>
 
@@ -79,5 +92,7 @@
     <string name="pref_enable_notifications_true">Enabled</string>
     <string name="pref_enable_notifications_false">Not Enabled</string>
     <string name="pref_enable_notifications_default" translatable="false">true</string>
+
+    <string name="format_art_url" translatable="false">https://raw.githubusercontent.com/udacity/Sunshine-Version-2/sunshine_master/app/src/main/res/drawable-xxhdpi/art_<xliff:g id="description">%s</xliff:g>.png</string>
 
 </resources>

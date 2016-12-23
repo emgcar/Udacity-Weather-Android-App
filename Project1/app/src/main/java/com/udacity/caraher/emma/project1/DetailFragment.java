@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.udacity.caraher.emma.project1.data.WeatherContract;
 
 /**
@@ -175,8 +176,13 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         mPressureView.setText(pressureText);
         mDescriptionView.setText(descText);
 
-        int icon = Utility.getArtResourceForWeatherCondition(cursor.getInt(COL_WEATHER_CONDITION_ID));
-        mIconView.setImageResource(icon);
+        //int icon = Utility.getArtResourceForWeatherCondition(cursor.getInt(COL_WEATHER_CONDITION_ID));
+        //mIconView.setImageResource(icon);
+        int weatherId = cursor.getInt(COL_WEATHER_CONDITION_ID);
+        Glide.with(this)
+                .load(Utility.getArtUrlForWeatherCondition(getActivity(), weatherId))
+                .error(Utility.getArtResourceForWeatherCondition(weatherId))
+                .into(mIconView);
     }
 
     @Override

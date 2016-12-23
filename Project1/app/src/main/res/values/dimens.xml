@@ -1,3 +1,4 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="notification_large_icon_default">48dp</dimen>
 </resources>
