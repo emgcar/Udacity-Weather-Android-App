@@ -1,9 +1,14 @@
 package com.udacity.caraher.emma.project1;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,12 +23,15 @@ import android.widget.ListView;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.content.CursorLoader;
+import android.widget.TextView;
 
 import com.udacity.caraher.emma.project1.data.WeatherContract;
 import com.udacity.caraher.emma.project1.sync.SunshineSyncAdapter;
 
+import org.w3c.dom.Text;
 
-public class ForecastFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+
+public class ForecastFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private ForecastAdapter mForecastAdapter;
     private ListView mListView;
@@ -84,6 +92,22 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.forecastfragment, menu);
     }
@@ -120,6 +144,8 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
         // Get a reference to the ListView, and attach this adapter to it.
         mListView = (ListView) rootView.findViewById(R.id.listview_forecast);
+        View emptyView = rootView.findViewById(R.id.empty_view);
+        mListView.setEmptyView(emptyView);
         mListView.setAdapter(mForecastAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -196,6 +222,8 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
             // to, do so now.
             mListView.smoothScrollToPosition(scrollPosition);
         }
+
+        updateEmptyView();
     }
 
     @Override
@@ -204,6 +232,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
     public void onLocationChanged() {
+        Utility.resetCurrentLocationStatus(getContext());
         updateWeather();
         getLoaderManager().restartLoader(MY_LOADER_ID, null, this);
     }
@@ -242,5 +271,43 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
             }
 
         }
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if ( key.equals(getString(R.string.pref_location_status_key)) ) {
+            updateEmptyView();
+        }
+    }
+
+    public void updateEmptyView() {
+
+        if (mForecastAdapter.getCount() == 0) {
+            TextView emptyView = (TextView) getView().findViewById(R.id.empty_view);
+
+            if (emptyView != null) {
+                int message = R.string.empty_database;
+                @SunshineSyncAdapter.LocationStatus int locationStatus = Utility.getLocationStatus(getContext());
+
+                switch(locationStatus) {
+                    case SunshineSyncAdapter.LOCATION_STATUS_SERVER_DOWN:
+                        message = R.string.empty_view_server_down;
+                        break;
+                    case SunshineSyncAdapter.LOCATION_STATUS_SERVER_INVALID:
+                        message = R.string.empty_view_server_error;
+                        break;
+                    case SunshineSyncAdapter.LOCATION_STATUS_INVALID:
+                        message = R.string.empty_view_location_input_error;
+                        break;
+                    default:
+                        boolean isConnected = Utility.isConnected(getContext());
+                        if (!isConnected) {
+                            message = R.string.empty_view_no_network;
+                        }
+                }
+                emptyView.setText(message);
+            }
+        }
+
     }
 }

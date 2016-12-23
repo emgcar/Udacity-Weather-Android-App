@@ -14,11 +14,28 @@
     <string name="action_share">Share</string>
     <string name="appid_key">c73d88b36a5f4230405e8a150afcaf66</string>
 
+    <string name="empty_database">No Weather Information Available</string>
+    <string name="empty_view_no_network">No Weather Information Available\n
+        The network is not available to fetch weather data</string>
+    <string name="empty_view_server_down">No Weather Information Available\n
+        The server is not returning data</string>
+    <string name="empty_view_server_error">No Weather Information Available\nThe server is not
+        returning valid data\nPlease check for an updated version of Sunshine</string>
+    <string name="empty_view_location_input_error">No Weather Information Available\n
+        The location in settings is not recognized by the weather server</string>
+
+    <string name="pref_location_error_description">Invalid Location (
+        <xliff:g id="location_setting">%1$s</xliff:g>)"</string>
+    <string name="pref_location_unknown_description">Validating Location... (
+        <xliff:g id="location_setting">%1$s</xliff:g>)"</string>
+
     <string name="pref_unit_celsius">Celsius</string>
     <string name="pref_unit_fahrenheit">Fahrenheit</string>
 
     <string name="format_wind_kmh"> km/H</string>
     <string name="format_wind_mph"> mph</string>
+
+    <string name="pref_location_status_key" translatable="false">loc-status</string>
 
     <string-array name="pref_temp_units">
         <item>Celsius</item>

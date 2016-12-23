@@ -1,10 +1,16 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <EditTextPreference
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.udacity.caraher.emma.project1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.udacity.caraher.emma.project1.LocationEditTextPreference
         android:defaultValue="@string/pref_location_default"
         android:inputType="text"
         android:key="@string/pref_location_key"
         android:singleLine="true"
-        android:title="@string/pref_location_label" />
+        android:title="@string/pref_location_label"
+        custom:minLength="3"/>
 
     <ListPreference
         android:defaultValue="Celsius"

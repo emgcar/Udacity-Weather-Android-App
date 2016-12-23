@@ -4,6 +4,7 @@ package com.udacity.caraher.emma.project1;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,9 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
+
+import com.udacity.caraher.emma.project1.data.WeatherContract;
+import com.udacity.caraher.emma.project1.sync.SunshineSyncAdapter;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -71,6 +75,17 @@ public class SettingsActivity extends PreferenceActivity
             }
         } else {
             // For other preferences, set the summary to the value's simple string representation.
+            int status = Utility.getLocationStatus(this);
+            switch(status) {
+                case SunshineSyncAdapter.LOCATION_STATUS_INVALID:
+                    stringValue = getString(R.string.pref_location_error_description);
+                    break;
+                case SunshineSyncAdapter.LOCATION_STATUS_OK:
+                    break;
+                default:
+                    stringValue = getString(R.string.pref_location_unknown_description);
+                    break;
+            }
             preference.setSummary(stringValue);
         }
         return true;

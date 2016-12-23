@@ -11,6 +11,8 @@
         android:name="android.permission.WRITE_SYNC_SETTINGS"/>
     <uses-permission
         android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission
+        android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -46,7 +48,7 @@
                 android:value="com.udacity.caraher.emma.project1.MainActivity" />
         </activity>
         <provider
-            android:authorities="com.example.android.sunshine.app"
+            android:authorities="com.udacity.caraher.emma.project1"
             android:name=".data.WeatherProvider"
             android:exported="false"
             android:syncable="true" />
