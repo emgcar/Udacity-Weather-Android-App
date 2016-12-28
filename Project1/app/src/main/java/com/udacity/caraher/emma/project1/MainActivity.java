@@ -1,17 +1,26 @@
 package com.udacity.caraher.emma.project1;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.udacity.caraher.emma.project1.sync.SunshineSyncAdapter;
+
+import static com.udacity.caraher.emma.project1.ForecastFragment.LOG_TAG;
 
 public class MainActivity extends AppCompatActivity implements ForecastFragment.Callback  {
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
 
     String mLocation;
     boolean mTwoPane;
@@ -44,6 +53,44 @@ public class MainActivity extends AppCompatActivity implements ForecastFragment.
         forecastFragment.setIsTablet(mTwoPane);
 
         SunshineSyncAdapter.initializeSyncAdapter(this);
+
+        // If Google Play Services is up to date, we'll want to register GCM. If it is not, we'll
+        // skip the registration and this device will not receive any downstream messages from
+        // our fake server. Because weather alerts are not a core feature of the app, this should
+        // not affect the behavior of the app, from a user perspective.
+        if (checkPlayServices()) {
+            // Because this is the initial creation of the app, we'll want to be certain we have
+            // a token. If we do not, then we will start the IntentService that will register this
+            // application with GCM.
+            SharedPreferences sharedPreferences =
+                    PreferenceManager.getDefaultSharedPreferences(this);
+            boolean sentToken = sharedPreferences.getBoolean(SENT_TOKEN_TO_SERVER, false);
+            if (!sentToken) {
+                Intent intent = new Intent(this, MyFirebaseInstanceIDService.class);
+                startService(intent);
+            }
+        }
+    }
+
+    /**
+     * Check the device to make sure it has the Google Play Services APK. If
+     * it doesn't, display a dialog that allows users to download the APK from
+     * the Google Play Store or enable it in the device's system settings.
+     */
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Log.i(LOG_TAG, "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
 
     @Override
