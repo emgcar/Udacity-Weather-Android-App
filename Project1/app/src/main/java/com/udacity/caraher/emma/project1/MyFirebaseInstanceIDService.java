@@ -26,6 +26,9 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
      */
     @Override
     public void onTokenRefresh() {
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "Refreshed token: " + refreshedToken);
+
         // Fetch updated Instance ID token.
         Intent intent = new Intent(this, RegistrationIntentService.class);
         startService(intent);

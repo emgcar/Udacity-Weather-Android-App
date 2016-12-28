@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements ForecastFragment.
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
 
+    private static final String TAG = "MyInstanceIDLS";
+
     String mLocation;
     boolean mTwoPane;
 
@@ -65,8 +67,12 @@ public class MainActivity extends AppCompatActivity implements ForecastFragment.
             SharedPreferences sharedPreferences =
                     PreferenceManager.getDefaultSharedPreferences(this);
             boolean sentToken = sharedPreferences.getBoolean(SENT_TOKEN_TO_SERVER, false);
+
+            String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+            Log.d(TAG, "Refreshed token: " + refreshedToken);
+
             if (!sentToken) {
-                Intent intent = new Intent(this, MyFirebaseInstanceIDService.class);
+                Intent intent = new Intent(this, RegistrationIntentService.class);
                 startService(intent);
             }
         }
