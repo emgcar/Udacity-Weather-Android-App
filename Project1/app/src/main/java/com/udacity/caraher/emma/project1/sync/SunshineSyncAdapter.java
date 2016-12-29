@@ -579,6 +579,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
                     builder.setSmallIcon(iconId);
                     builder.setContentTitle(title);
                     builder.setContentText(contentText);
+                    builder.setColor(resources.getColor(R.color.primary_light));
 
                     Intent intent = new Intent(context, MainActivity.class);
                     TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);

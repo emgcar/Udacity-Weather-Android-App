@@ -78,12 +78,12 @@ public class SettingsActivity extends PreferenceActivity
             int status = Utility.getLocationStatus(this);
             switch(status) {
                 case SunshineSyncAdapter.LOCATION_STATUS_INVALID:
-                    stringValue = getString(R.string.pref_location_error_description);
+                    stringValue = getString(R.string.pref_location_error_description, stringValue);
                     break;
                 case SunshineSyncAdapter.LOCATION_STATUS_OK:
                     break;
                 default:
-                    stringValue = getString(R.string.pref_location_unknown_description);
+                    stringValue = getString(R.string.pref_location_unknown_description, stringValue);
                     break;
             }
             preference.setSummary(stringValue);
