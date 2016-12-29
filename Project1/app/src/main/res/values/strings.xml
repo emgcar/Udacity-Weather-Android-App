@@ -69,6 +69,10 @@
     <!-- Date format for displaying day of week and date (i.e. Mon Jun 1) [CHAR LIMIT=20] -->
     <string name="format_full_friendly_date"><xliff:g id="day">%1$s</xliff:g>, <xliff:g id="date">%2$s</xliff:g></string>
 
+    <string name="humidity">Humidity</string>
+    <string name="pressure">Pressure</string>
+    <string name="wind">Wind</string>
+
     <string name="format_temperature" ><xliff:g id="temp">%1.0f</xliff:g>\u00B0</string>
     <string name="format_humidity" >HUMIDITY: <xliff:g id="humidity">%1.0f</xliff:g>\uFF05</string>
     <string name="format_pressure" >PRESSURE: <xliff:g id="pressure">%1.0f</xliff:g> bar</string>

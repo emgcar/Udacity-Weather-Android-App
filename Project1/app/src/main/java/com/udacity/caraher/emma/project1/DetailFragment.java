@@ -89,13 +89,13 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         View rootView = inflater.inflate(R.layout.activity_detail, container, false);
         mIconView = (ImageView) rootView.findViewById(R.id.list_item_icon);
         mDateView = (TextView) rootView.findViewById(R.id.list_item_date_textView);
-        mFriendlyDateView = (TextView) rootView.findViewById(R.id.list_item_day_textView);
+        //mFriendlyDateView = (TextView) rootView.findViewById(R.id.list_item_day_textView);
         mDescriptionView = (TextView) rootView.findViewById(R.id.list_item_desc_textview);
         mHighTempView = (TextView) rootView.findViewById(R.id.list_item_high_textview);
         mLowTempView = (TextView) rootView.findViewById(R.id.list_item_low_textview);
-        mHumidityView = (TextView) rootView.findViewById(R.id.list_item_humidity);
-        mWindView = (TextView) rootView.findViewById(R.id.list_item_wind);
-        mPressureView = (TextView) rootView.findViewById(R.id.list_item_pressure);
+        //mHumidityView = (TextView) rootView.findViewById(R.id.list_item_humidity);
+        //mWindView = (TextView) rootView.findViewById(R.id.list_item_wind);
+        //mPressureView = (TextView) rootView.findViewById(R.id.list_item_pressure);
         return rootView;
     }
 
@@ -156,7 +156,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         String dateText = Utility.getFormattedMonthDay(getActivity(), cursor.getLong(COL_WEATHER_DATE));
 
         String descText = cursor.getString(COL_WEATHER_DESC);
-        mIconView.setContentDescription(descText);
+        //mIconView.setContentDescription(descText);
 
         boolean isMetric = Utility.isMetric(getActivity());
         String highText = Utility.formatTemperature(getActivity(), cursor.getDouble(COL_WEATHER_MAX_TEMP), isMetric);
@@ -167,22 +167,22 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
                 cursor.getDouble(COL_WEATHER_WIND_DIRECTION), isMetric);
         String pressureText = Utility.formatPressure(getActivity(), cursor.getDouble(COL_WEATHER_PRESSURE));
 
-        mFriendlyDateView.setText(dayText);
+        //mFriendlyDateView.setText(dayText);
         mDateView.setText(dateText);
         mHighTempView.setText(highText);
         mLowTempView.setText(lowText);
-        mHumidityView.setText(humidityText);
-        mWindView.setText(windText);
-        mPressureView.setText(pressureText);
+        //mHumidityView.setText(humidityText);
+        //mWindView.setText(windText);
+        //mPressureView.setText(pressureText);
         mDescriptionView.setText(descText);
 
-        //int icon = Utility.getArtResourceForWeatherCondition(cursor.getInt(COL_WEATHER_CONDITION_ID));
-        //mIconView.setImageResource(icon);
-        int weatherId = cursor.getInt(COL_WEATHER_CONDITION_ID);
+        int icon = Utility.getArtResourceForWeatherCondition(cursor.getInt(COL_WEATHER_CONDITION_ID));
+        mIconView.setImageResource(icon);
+        /*int weatherId = cursor.getInt(COL_WEATHER_CONDITION_ID);
         Glide.with(this)
                 .load(Utility.getArtUrlForWeatherCondition(getActivity(), weatherId))
                 .error(Utility.getArtResourceForWeatherCondition(weatherId))
-                .into(mIconView);
+                .into(mIconView);*/
     }
 
     @Override

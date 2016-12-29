@@ -1,4 +1,4 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.udacity.caraher.emma.project1.DetailFragment"
     android:layout_height="match_parent"
@@ -106,4 +106,25 @@
 
     </LinearLayout>
 
-</ScrollView>
+</ScrollView>-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/container"
+    tools:context="com.udacity.caraher.emma.project1.DetailActivity"
+    android:orientation="vertical">
+
+    <include layout="@layout/detail_top_grid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"/>
+
+    <include layout="@layout/detail_bottom_grid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"/>
+
+    
+</LinearLayout>
