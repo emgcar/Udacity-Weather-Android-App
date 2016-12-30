@@ -35,7 +35,7 @@ public class ForecastAdapter extends CursorAdapter {
         int layoutId = R.layout.list_item_forecast;
 
         if (viewType == 0)
-            layoutId = R.layout.list_item_forecast_today;
+            layoutId = R.layout.detail_top_grid;
 
         View view = LayoutInflater.from(context).inflate(layoutId, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
@@ -106,8 +106,8 @@ public class ForecastAdapter extends CursorAdapter {
 
         public ViewHolder(View view) {
             iconView = (ImageView) view.findViewById(R.id.list_item_icon);
-            dateView = (TextView) view.findViewById(R.id.list_item_date_textview);
-            descriptionView = (TextView) view.findViewById(R.id.list_item_forecast_textview);
+            dateView = (TextView) view.findViewById(R.id.list_item_date_textView);
+            descriptionView = (TextView) view.findViewById(R.id.list_item_desc_textview);
             highTempView = (TextView) view.findViewById(R.id.list_item_high_textview);
             lowTempView = (TextView) view.findViewById(R.id.list_item_low_textview);
         }

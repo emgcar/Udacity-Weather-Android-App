@@ -93,9 +93,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         mDescriptionView = (TextView) rootView.findViewById(R.id.list_item_desc_textview);
         mHighTempView = (TextView) rootView.findViewById(R.id.list_item_high_textview);
         mLowTempView = (TextView) rootView.findViewById(R.id.list_item_low_textview);
-        //mHumidityView = (TextView) rootView.findViewById(R.id.list_item_humidity);
-        //mWindView = (TextView) rootView.findViewById(R.id.list_item_wind);
-        //mPressureView = (TextView) rootView.findViewById(R.id.list_item_pressure);
+        mHumidityView = (TextView) rootView.findViewById(R.id.list_item_humidity);
+        mWindView = (TextView) rootView.findViewById(R.id.list_item_wind);
+        mPressureView = (TextView) rootView.findViewById(R.id.list_item_pressure);
         return rootView;
     }
 
@@ -171,9 +171,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         mDateView.setText(dateText);
         mHighTempView.setText(highText);
         mLowTempView.setText(lowText);
-        //mHumidityView.setText(humidityText);
-        //mWindView.setText(windText);
-        //mPressureView.setText(pressureText);
+        mHumidityView.setText(humidityText);
+        mWindView.setText(windText);
+        mPressureView.setText(pressureText);
         mDescriptionView.setText(descText);
 
         int icon = Utility.getArtResourceForWeatherCondition(cursor.getInt(COL_WEATHER_CONDITION_ID));

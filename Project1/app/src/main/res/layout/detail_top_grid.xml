@@ -23,7 +23,7 @@
         app:layout_columnSpan="2"
         app:layout_columnWeight="1"
         app:layout_gravity="fill_horizontal"
-        tools:text="Tomorrow, May 09"/>
+        android:text="Tomorrow, May 09"/>
 
     <ImageView
         android:id="@+id/list_item_icon"
@@ -33,7 +33,7 @@
         android:maxWidth="@dimen/today_icon"
         app:layout_columnWeight="1"
         app:layout_gravity="fill_horizontal"
-        tools:src="@drawable/art_clear"/>
+        android:src="@drawable/art_clear"/>
 
     <TextView
         android:id="@+id/list_item_high_textview"
@@ -44,7 +44,7 @@
         android:fontFamily="sans-serif-light"
         android:textColor="@color/primary_text"
         android:textSize="72sp"
-        tools:text="10d"/>
+        android:text="10d"/>
 
     <TextView
         android:id="@+id/list_item_desc_textview"
@@ -54,7 +54,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="@color/secondary_text"
         app:layout_columnWeight="1"
-        tools:text="Clear"/>
+        android:text="Clear"/>
 
     <TextView
         android:id="@+id/list_item_low_textview"
@@ -65,7 +65,7 @@
         android:textColor="@color/secondary_text"
         android:textSize="36sp"
         app:layout_columnWeight="1"
-        tools:text="6d"/>
+        android:text="6d"/>
 
     <android.support.v7.widget.Space
         app:layout_columnSpan="2"

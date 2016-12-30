@@ -116,12 +116,6 @@
     tools:context="com.udacity.caraher.emma.project1.DetailActivity"
     android:orientation="vertical">
 
-    <!--<android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/white" />-->
-
     <include layout="@layout/detail_top_grid"
         android:layout_width="match_parent"
         android:layout_height="0dp"
