@@ -11,17 +11,17 @@
         android:layout_height="match_parent"
         android:id="@+id/container"
         tools:context="com.udacity.caraher.emma.project1.DetailActivity"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_margin="30dp">
 
         <include layout="@layout/detail_top_grid"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
             android:layout_weight="3"/>
 
         <include layout="@layout/detail_bottom_grid"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
             android:layout_weight="2"/>
 
 
