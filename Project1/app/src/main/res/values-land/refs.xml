@@ -1,3 +1,0 @@
-<resources>
-    <item type="layout" name="activity_detail">@layout/fragment_detail_wide</item>
-</resources>
