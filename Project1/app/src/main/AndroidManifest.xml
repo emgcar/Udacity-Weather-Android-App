@@ -1,26 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="com.udacity.caraher.emma.project1">
+<?xml version="1.0" encoding="utf-8"?>
 
-<uses-permission android:name="android.permission.INTERNET" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.udacity.caraher.emma.project1">
 
-<!-- Permissions required by the sync adapter -->
-<uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
-<uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
-<uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
-<!-- Permissions required for Google Cloud Messaging -->
-<uses-permission android:name="android.permission.WAKE_LOCK" />
-<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <!-- Permissions required by the sync adapter -->
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-<permission android:name="com.udacity.caraher.emma.project1.permission.C2D_MESSAGE"
-    android:protectionLevel="signature" />
+    <!-- Permissions required for Google Cloud Messaging -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-<uses-permission android:name="com.udacity.caraher.emma.project1.permission.C2D_MESSAGE" />
+
+    <permission android:name="com.udacity.caraher.emma.project1.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.udacity.caraher.emma.project1.permission.C2D_MESSAGE" />
+
+    <!-- Permissions required to use the Place Picker -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 <application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name"
     android:supportsRtl="true" android:theme="@style/AppTheme">
-    <activity android:name=".MainActivity" android:label="@string/app_name">
+    <activity android:name=".MainActivity"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme.Main" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +36,8 @@ package="com.udacity.caraher.emma.project1">
         </intent-filter>
     </activity>
     <activity android:name=".DetailActivity" android:label="@string/title_activity_detail"
-        android:parentActivityName=".MainActivity">
+        android:parentActivityName=".MainActivity"
+        android:theme="@style/AppTheme.Details">
         <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.udacity.caraher.emma.project1.MainActivity" />
     </activity>
     <activity android:name=".SettingsActivity" android:label="@string/title_activity_settings"
@@ -74,6 +83,11 @@ package="com.udacity.caraher.emma.project1">
         android:name=".RegistrationIntentService"
         android:exported="false" >
     </service>
+
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="cbd83252bd768276a185e239e5a2ce8aa427d605"/>
+
 </application>
 
 </manifest>

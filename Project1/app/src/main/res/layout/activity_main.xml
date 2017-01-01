@@ -10,11 +10,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -38,5 +38,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.udacity.caraher.emma.project1.ForecastFragment"
-        tools:layout="@android:layout/list_content" />
+        tools:layout="@android:layout/list_content"
+        app:sharedElementTransitions="true"/>
 </LinearLayout>

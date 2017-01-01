@@ -16,6 +16,10 @@ import java.util.Locale;
 
 
 public class Utility {
+
+    // We'll default our latlong to 0. Yay, "Earth!"
+    public static float DEFAULT_LATLONG = 0F;
+
     public static String getPreferredLocation(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString(context.getString(R.string.pref_location_key),
@@ -516,5 +520,37 @@ public class Utility {
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
+    }
+
+    public static boolean isLocationLatLonAvailable(Context context) {
+        SharedPreferences prefs
+                = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.contains(context.getString(R.string.pref_location_latitude))
+                && prefs.contains(context.getString(R.string.pref_location_longitude));
+    }
+
+    public static float getLocationLatitude(Context context) {
+        SharedPreferences prefs
+                = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getFloat(context.getString(R.string.pref_location_latitude),
+                DEFAULT_LATLONG);
+    }
+
+    public static float getLocationLongitude(Context context) {
+        SharedPreferences prefs
+                = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getFloat(context.getString(R.string.pref_location_longitude),
+                DEFAULT_LATLONG);
+    }
+
+    /**
+     * Resets the location status.  (Sets it to SunshineSyncAdapter.LOCATION_STATUS_UNKNOWN)
+     * @param c Context used to get the SharedPreferences
+     */
+    static public void resetLocationStatus(Context c){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences.Editor spe = sp.edit();
+        spe.putInt(c.getString(R.string.pref_location_status_key), SunshineSyncAdapter.LOCATION_STATUS_UNKNOWN);
+        spe.apply();
     }
 }

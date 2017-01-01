@@ -1,8 +1,10 @@
 package com.udacity.caraher.emma.project1;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -12,6 +14,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +22,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -40,6 +45,10 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
     private RecyclerView mRecyclerView;
     private int mPosition = RecyclerView.NO_POSITION;
+
+    private boolean mHoldForTransition;
+    private int mChoiceMode;
+    private boolean mAutoSelectView;
 
     private static final String SELECTED_KEY = "ITEM_POSITION";
     public static final String LOG_TAG = ForecastFragment.class.getSimpleName();
@@ -82,7 +91,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         /**
         * DetailFragmentCallback for when an item has been selected.
         */
-        public void onItemSelected(Uri dateUri);
+        public void onItemSelected(Uri dateUri, ForecastAdapter.ForecastAdapterViewHolder vh);
     }
 
     public ForecastFragment() {
@@ -158,7 +167,8 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
                 String locationSetting = Utility.getPreferredLocation(getActivity());
                 ((Callback) getActivity())
                         .onItemSelected(WeatherContract.WeatherEntry.buildWeatherLocationWithDate(
-                                locationSetting, date)
+                                locationSetting, date),
+                                vh
                         );
                 mPosition = vh.getAdapterPosition();
             }
@@ -193,6 +203,10 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     public void onActivityCreated(Bundle bundle) {
         super.onActivityCreated(bundle);
 
+        if ( mHoldForTransition ) {
+            getActivity().supportPostponeEnterTransition();
+        }
+
         getLoaderManager().initLoader(MY_LOADER_ID, null, this);
     }
 
@@ -225,6 +239,32 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         }
 
         updateEmptyView();
+
+        if ( cursor.getCount() == 0 ) {
+            getActivity().supportStartPostponedEnterTransition();
+        }else {
+            mRecyclerView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                @Override
+                public boolean onPreDraw() {
+                    // Since we know we're going to get items, we keep the listener around until
+                    // we see Children.
+                    if (mRecyclerView.getChildCount() > 0) {
+                        /*mRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+                        int itemPosition = mForecastAdapter.getSelectedItemPosition();
+                        if ( RecyclerView.NO_POSITION == itemPosition ) itemPosition = 0;
+                        RecyclerView.ViewHolder vh = mRecyclerView.findViewHolderForAdapterPosition(itemPosition);
+                        if ( null != vh && mAutoSelectView ) {
+                            mForecastAdapter.selectView( vh );
+                        }*/
+                        if ( mHoldForTransition ) {
+                            getActivity().supportStartPostponedEnterTransition();
+                        }
+                        return true;
+                    }
+                    return false;
+                }
+            });
+        }
     }
 
     @Override
@@ -310,5 +350,16 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
             }
         }
 
+    }
+
+    @Override
+    public void onInflate(Activity activity, AttributeSet attrs, Bundle savedInstanceState) {
+        super.onInflate(activity, attrs, savedInstanceState);
+        TypedArray a = activity.obtainStyledAttributes(attrs, R.styleable.ForecastFragment,
+                0, 0);
+        mChoiceMode = a.getInt(R.styleable.ForecastFragment_android_choiceMode, AbsListView.CHOICE_MODE_NONE);
+        mAutoSelectView = a.getBoolean(R.styleable.ForecastFragment_autoSelectView, false);
+        mHoldForTransition = a.getBoolean(R.styleable.ForecastFragment_sharedElementTransitions, false);
+        a.recycle();
     }
 }

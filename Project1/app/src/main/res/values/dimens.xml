@@ -13,4 +13,8 @@
     <dimen name="details_app_bar_overlap">24dp</dimen>
     <dimen name="list_item_extra_padding">0dp</dimen>
     <dimen name="detail_card_elevation">6dp</dimen>
+
+    <!-- Today Widget -->
+    <dimen name="widget_today_default_width">40dp</dimen>
+    <dimen name="widget_today_default_height">40dp</dimen>
 </resources>

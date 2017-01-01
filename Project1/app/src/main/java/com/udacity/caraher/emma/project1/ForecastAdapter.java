@@ -2,6 +2,7 @@ package com.udacity.caraher.emma.project1;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -126,6 +127,10 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
                     .crossFade()
                     .into(forecastAdapterViewHolder.mIconView);
         }
+
+        // this enables better animations. even if we lose state due to a device rotation,
+        // the animator can use this to re-find the original view
+        ViewCompat.setTransitionName(forecastAdapterViewHolder.mIconView, "iconView" + position);
 
         // Read date from cursor
         long dateInMillis = mCursor.getLong(ForecastFragment.COL_WEATHER_DATE);
